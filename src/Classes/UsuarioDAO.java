@@ -118,38 +118,22 @@ public class UsuarioDAO {
         this.read();
     }
 
-    public ArrayList<Usuario> search(String textoPesquisa) {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM user WHERE usuario LIKE ?";
+    public boolean search(String texto, String nomeColuna) {
+        String sql = "SELECT EXISTS (SELECT 1 FROM user WHERE " + nomeColuna + " = ? COLLATE utf8mb4_bin) AS texto_presente";
         con = ConnectionFactory.getConnection();
-
-        if (con == null) {
-            System.err.println("Erro ao conectar ao banco de dados.");
-            return usuarios; // Retorna uma lista vazia
-        }
+        boolean existe = false;
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            String textoBusca = "%" + textoPesquisa + "%";
-            stmt.setString(1, textoBusca);
-            stmt.setString(2, textoBusca);
-
+            stmt.setString(1, texto); // Substitui o ? pelo texto exato que está sendo pesquisado
             try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Usuario user = new Usuario();
-                    user.setId(rs.getInt("id"));
-                    user.setUser(rs.getString("usuario"));
-                    user.setSenha(rs.getString("senha"));
-
-                    usuarios.add(user);
+                if (rs.next()) {
+                    existe = rs.getBoolean("texto_presente"); // Pega o valor do alias da consulta
                 }
             }
         } catch (Exception e) {
-            System.err.println("Erro ao buscar tarefas: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            ConnectionFactory.closerConnection(con, stmt, rs);
+            e.printStackTrace(); // Exibe o erro no console
         }
-        return usuarios;
-    }
 
+        return existe;
+    }  
 }

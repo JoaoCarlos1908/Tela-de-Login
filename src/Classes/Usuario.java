@@ -1,18 +1,24 @@
 
 package Classes;
 
-class Usuario {
+public class Usuario {
     //Atributos
     private int id;
     private String user;
     private String senha;
+    private String nome;
+    private int idade;
+    private String email;
     
     //Construtor
 
     public Usuario() {
         this.id = 0;
-        this.user = "Root";
-        this.senha = "admin";
+        this.user = "";
+        this.senha = "";
+        this.nome = "";
+        this.idade = 0;
+        this.email = "";
     }
     
     //Metodos
@@ -38,6 +44,30 @@ class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }
