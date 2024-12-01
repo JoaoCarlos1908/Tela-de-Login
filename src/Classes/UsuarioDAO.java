@@ -1,6 +1,5 @@
 package Classes;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,7 @@ public class UsuarioDAO {
     private ResultSet rs;
     
     //Metodos
-    public void adicionarTarefa(Usuario user){//create
+    public void create(Usuario user){//create
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement("INSERT INTO user(usuario, senha)VALUES(?,?)");
@@ -33,69 +32,7 @@ public class UsuarioDAO {
         }
     }
     
-     public void remover(Usuario user) {
-         try {
-            // Obter a conexão (substitua pelo seu método de conexão)
-            con = ConnectionFactory.getConnection();
-            // Preparar a instrução SQL para deletar a tarefa pelo ID
-            String sql = "DELETE FROM user WHERE id = ?";
-            stmt = con.prepareStatement(sql);
-
-            //Definir o ID da tarefa como parâmetro
-            stmt.setInt(1, user.getId());
-
-            // Executar a instrução
-            int rowsAffected = stmt.executeUpdate();
-
-            // Feedback para o usuário
-            if (rowsAffected > 0) {
-                 
-            } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma tarefa encontrada com o ID especificado.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao remover a tarefa: " + ex.getMessage());
-        } finally {
-            // Fechar a conexão e a declaração
-            ConnectionFactory.closerConnection(con, stmt);
-        }
-        this.listarTarefas();
-    }
-
-
-    
-    public void editar(Usuario user, Boolean estado) {
-        try {
-            // Obter a conexão (substitua pelo seu método de conexão)
-            con = ConnectionFactory.getConnection();
-            // Query SQL para atualizar a tarefa existente
-            String sql = "UPDATE uer SET usuario = ?, senha = ? WHERE id = ?";
-            
-            if (estado) {
-                stmt = con.prepareStatement(sql);
-
-                //Preenchendo os parâmetros da query
-                stmt.setString(1, user.getUser());
-                stmt.setString(2, user.getSenha());
-                stmt.setInt(3, user.getId()); // ID da tarefa para atualização
-
-                // Executa a query
-                stmt.executeUpdate();
-            
-            } else {
-                // Chama o método responsável por adicionar uma nova tarefa
-                this.adicionarTarefa(user);
-            }
-        } catch (SQLException ex) {
-            // Exibe mensagem de erro
-            JOptionPane.showMessageDialog(null, "Erro ao salvar ou editar a tarefa: " + ex.getMessage());
-        } finally {
-            // Fecha conexão
-            ConnectionFactory.closerConnection(con, stmt);
-        }
-    }   
-
-    public ArrayList<Usuario> listarTarefas() {
+    public ArrayList<Usuario> read() {
         String sql = "SELECT * FROM user";
         ArrayList<Usuario> usuarios = new ArrayList<>();
         
@@ -121,7 +58,67 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public ArrayList<Usuario> buscarTarefasPorTexto(String textoPesquisa) {
+    public void update(Usuario user, Boolean estado) {
+        try {
+            // Obter a conexão (substitua pelo seu método de conexão)
+            con = ConnectionFactory.getConnection();
+            // Query SQL para atualizar a tarefa existente
+            String sql = "UPDATE uer SET usuario = ?, senha = ? WHERE id = ?";
+            
+            if (estado) {
+                stmt = con.prepareStatement(sql);
+
+                //Preenchendo os parâmetros da query
+                stmt.setString(1, user.getUser());
+                stmt.setString(2, user.getSenha());
+                stmt.setInt(3, user.getId()); // ID da tarefa para atualização
+
+                // Executa a query
+                stmt.executeUpdate();
+            
+            } else {
+                // Chama o método responsável por adicionar uma nova tarefa
+                this.create(user);
+            }
+        } catch (SQLException ex) {
+            // Exibe mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro ao salvar ou editar a tarefa: " + ex.getMessage());
+        } finally {
+            // Fecha conexão
+            ConnectionFactory.closerConnection(con, stmt);
+        }
+    }   
+    
+     public void delete(Usuario user) {
+         try {
+            // Obter a conexão (substitua pelo seu método de conexão)
+            con = ConnectionFactory.getConnection();
+            // Preparar a instrução SQL para deletar a tarefa pelo ID
+            String sql = "DELETE FROM user WHERE id = ?";
+            stmt = con.prepareStatement(sql);
+
+            //Definir o ID da tarefa como parâmetro
+            stmt.setInt(1, user.getId());
+
+            // Executar a instrução
+            int rowsAffected = stmt.executeUpdate();
+
+            // Feedback para o usuário
+            if (rowsAffected > 0) {
+                 
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma tarefa encontrada com o ID especificado.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao remover a tarefa: " + ex.getMessage());
+        } finally {
+            // Fechar a conexão e a declaração
+            ConnectionFactory.closerConnection(con, stmt);
+        }
+        this.read();
+    }
+
+    public ArrayList<Usuario> search(String textoPesquisa) {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM user WHERE usuario LIKE ?";
         con = ConnectionFactory.getConnection();
