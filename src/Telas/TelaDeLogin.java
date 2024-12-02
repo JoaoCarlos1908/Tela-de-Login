@@ -56,7 +56,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setText("Icon");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icon.png"))); // NOI18N
 
         txtPass.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
@@ -65,31 +65,29 @@ public class TelaDeLogin extends javax.swing.JFrame {
         JPanelLoginLayout.setHorizontalGroup(
             JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelLoginLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUser)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLoginLayout.createSequentialGroup()
+                        .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(JPanelLoginLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLoginLayout.createSequentialGroup()
-                                .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCadastrar))
-                            .addComponent(txtPass)))
-                    .addGroup(JPanelLoginLayout.createSequentialGroup()
-                        .addGap(225, 225, 225)
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel3)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         JPanelLoginLayout.setVerticalGroup(
             JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelLoginLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(JPanelLoginLayout.createSequentialGroup()
@@ -102,7 +100,7 @@ public class TelaDeLogin extends javax.swing.JFrame {
                 .addGroup(JPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnAcessar))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -129,7 +129,7 @@ public class DadosCadastro extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setText("Icon");
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao1\\Downloads\\63 Sem Título_20241202102459.png")); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel4.setText("Nome");
