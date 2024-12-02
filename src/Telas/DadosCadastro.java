@@ -2,17 +2,17 @@
 package Telas;
 
 import Classes.GerenciadorLogin;
-import javax.swing.JTextField;
 
 public class DadosCadastro extends javax.swing.JPanel {
 
     TelaDeCadastro cadastro;
     GerenciadorLogin gerenciar;
+    TelaDeLogin login = new TelaDeLogin();
     
     public DadosCadastro(TelaDeCadastro cadastro) {
         initComponents();
         this.cadastro = cadastro;
-        gerenciar = new GerenciadorLogin(this, cadastro);
+        gerenciar = new GerenciadorLogin(this, cadastro, login);
     }
 
     public String getEmail() {

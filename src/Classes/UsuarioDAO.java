@@ -136,4 +136,27 @@ public class UsuarioDAO {
 
         return existe;
     }  
+    
+    public boolean verifyPass(String username, String password) {
+        String sql = "SELECT senha FROM user WHERE usuario = ? COLLATE utf8mb4_bin";
+        con = ConnectionFactory.getConnection();
+        boolean isAuthenticated = false;
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, username); // Define o parâmetro para o nome de usuário
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Obtemos a senha armazenada no banco de dados
+                    String storedPassword = rs.getString("senha");
+                    // Comparar a senha armazenada com a senha fornecida
+                    isAuthenticated = storedPassword.equals(password); // Aqui você pode aplicar hashing para mais segurança
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Exibe o erro no console
+        }
+        return isAuthenticated;
+    }
+
 }

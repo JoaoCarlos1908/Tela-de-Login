@@ -7,17 +7,31 @@ import Telas.TelaDeLogin;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GerenciadorLogin {
     
     DadosCadastro dados;
     TelaDeCadastro cadastro;
+    TelaDeLogin login;
     
-    public GerenciadorLogin(DadosCadastro dados, TelaDeCadastro cadastro) {
+    public GerenciadorLogin(DadosCadastro dados, TelaDeCadastro cadastro, TelaDeLogin login) {
         this.dados = dados;
         this.cadastro = cadastro;
+        this.login = login;
+    }
+    
+    public void Acessar(){
+        UsuarioDAO dao = new UsuarioDAO();
+        if(dao.search(login.getUser(), "usuario")){
+            if(dao.verifyPass(login.getUser(), login.getPass())){
+                JOptionPane.showMessageDialog(null, "Acesso liberado!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario ou senha incorreto!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuario ou senha incorreto!");
+        }
     }
     
     public Boolean txtNull(Container container){

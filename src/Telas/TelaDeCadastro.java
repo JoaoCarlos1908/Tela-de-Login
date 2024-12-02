@@ -8,12 +8,13 @@ public class TelaDeCadastro extends javax.swing.JFrame {
 
     GerenciadorLogin gerenciar;
     DadosCadastro dados;
+    TelaDeLogin login = new TelaDeLogin();
     
     public TelaDeCadastro() {
         initComponents();
         dados = new DadosCadastro(this);
         this.setLocationRelativeTo(null);//cebtraliza a janela
-        gerenciar = new GerenciadorLogin(dados, this);
+        gerenciar = new GerenciadorLogin(dados, this, login);
         TelaCadastro.setLayout(new BoxLayout(TelaCadastro, BoxLayout.Y_AXIS));  // Organiza os painéis em coluna
         TelaCadastro.add(dados);
         TelaCadastro.repaint();
